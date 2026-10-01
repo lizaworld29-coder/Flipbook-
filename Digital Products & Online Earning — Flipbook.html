@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Digital Products & Online Earning — Flipbook</title>
+<link href="https://fonts.googleapis.com/css2?family=Kalam:wght@700&family=Patrick+Hand&display=swap" rel="stylesheet">
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);--desk1:#efe8ff;--desk2:#ffd9ea;--ui:#2b2b3a;--btn:#fff}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--desk1:#1a1438;--desk2:#34144a;--ui:#f1ecff;--btn:#2b2450}}
+:root[data-theme="dark"]{--desk1:#1a1438;--desk2:#34144a;--ui:#f1ecff;--btn:#2b2450}
+html{scroll-padding-top:env(safe-area-inset-top,0px);height:100%}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:space-between;background:linear-gradient(160deg,var(--desk1),var(--desk2));color:var(--ui);font-family:'Patrick Hand','Comic Sans MS',cursive,sans-serif;overflow:hidden}
+.top{padding:10px 14px 0;text-align:center;font-family:Kalam,'Patrick Hand',cursive;font-weight:700;font-size:15px}
+.top small{display:block;font-family:'Patrick Hand',cursive;font-weight:400;opacity:.7;font-size:13px}
+#stage{perspective:2000px;display:flex;align-items:center;justify-content:center;flex:1;width:100%;min-height:0}
+#book{position:relative;width:min(88vw,440px,calc((100dvh - 200px)*.72));aspect-ratio:.72;touch-action:pan-y;user-select:none;-webkit-user-select:none;filter:drop-shadow(0 14px 22px rgba(40,20,80,.35))}
+.leaf{position:absolute;inset:0;transform-origin:left center;transform-style:preserve-3d;transition:transform .85s cubic-bezier(.45,.05,.25,1)}
+.leaf.flip{transform:rotateY(-180deg)}
+.face{position:absolute;inset:0;overflow:hidden;border-radius:3px 14px 14px 3px;-webkit-backface-visibility:hidden;backface-visibility:hidden;background:#fffdf4}
+.back{transform:rotateY(180deg);background:#f3ecda}
+.face::after{content:"";position:absolute;left:0;top:0;bottom:0;width:22px;background:linear-gradient(90deg,rgba(60,40,90,.28),transparent);pointer-events:none}
+.pg{height:100%;padding:16px 14px 26px 30px;background:#fffdf4 repeating-linear-gradient(transparent 0 27px,#d9e9f8 27px 28px);position:relative;color:#2b2b3a}
+.pg::before{content:"";position:absolute;left:26px;top:0;bottom:0;border-left:2px solid #f4a8a8}
+.in{height:100%;overflow-y:auto;touch-action:pan-y;scrollbar-width:none;font-size:15px;line-height:1.45}
+.in::-webkit-scrollbar{display:none}
+.pn{position:absolute;bottom:5px;right:14px;font-size:12px;opacity:.55}
+.hd{position:relative;padding-right:60px;margin-bottom:8px}
+.tag{display:inline-block;font-size:11px;letter-spacing:.5px;padding:1px 9px;border:2px solid #2b2b3a;border-radius:255px 15px 225px 15px/15px 225px 15px 255px;background:var(--c,#ffe566);font-weight:700}
+h2{font-family:Kalam,cursive;font-size:22px;line-height:1.15;margin:4px 0 2px;text-decoration:underline wavy #ec4899;text-underline-offset:5px;text-decoration-thickness:2px}
+.blob{position:absolute;right:0;top:0;width:50px;height:50px;border:2.5px solid #2b2b3a;border-radius:50% 45% 52% 48%;background:var(--c,#ffe566);display:flex;align-items:center;justify-content:center;font-size:26px}
+.cont{font-size:12px;opacity:.65;margin-bottom:4px}
+p{margin:6px 0}
+h3{display:inline-block;margin:10px 0 3px;padding:1px 10px;font-family:Kalam,cursive;font-size:15px;border-radius:6px 12px 8px 14px;transform:rotate(-1.2deg)}
+.call{margin:9px 2px;padding:9px 12px;font-family:Kalam,cursive;font-size:14.5px;line-height:1.35;background:#fff3a6;border:2.5px solid #2b2b3a;border-radius:255px 15px 225px 15px/15px 225px 15px 255px;box-shadow:3px 3px 0 #ff9ec0}
+.li{display:flex;gap:9px;margin:3px 0;align-items:flex-start}
+.li i{flex:none;width:11px;height:11px;margin-top:6px;border:2px solid #2b2b3a;border-radius:50%;background:var(--c,#b3dcff)}
+.li.box i{border-radius:3px;background:#fff}
+.li.x i,.li.ok i{border:0;background:none;width:14px;height:auto;margin-top:0;font-style:normal;font-weight:700;font-size:17px;line-height:1.3}
+.li.x i{color:#e11d48}.li.ok i{color:#16a34a}
+.chips{margin:4px 0 8px}
+.chip{display:inline-block;margin:3px 4px 3px 0;padding:2px 9px;font-size:12.5px;font-weight:700;border:2px solid #2b2b3a;border-radius:255px 15px 225px 15px/15px 225px 15px 255px;background:var(--c,#ffe566)}
+.cmd{display:flex;gap:8px;margin:5px 0;align-items:center;font-size:13.5px}.cmd .chip{flex:none;width:96px;text-align:center;margin:0}
+.c0{--c:#ffe566;background:#ffe566}.c1{--c:#ffb3c7;background:#ffb3c7}.c2{--c:#b5efcf;background:#b5efcf}.c3{--c:#b3dcff;background:#b3dcff}.c4{--c:#d6c7ff;background:#d6c7ff}.c5{--c:#ffd0a6;background:#ffd0a6}
+.toc{display:flex;gap:9px;align-items:center;margin:2px 0;padding:2px 0;cursor:pointer;font-size:14px;line-height:1.2}
+.toc b{flex:none;width:24px;height:24px;border:2px solid #2b2b3a;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;background:var(--c)}
+.cover{height:100%;padding:26px 18px 18px 30px;background:linear-gradient(160deg,#fff7c9,#ffd9ea 60%,#cfe8ff);position:relative;color:#2b2b3a}
+.cover .t{display:inline-block;font-family:Kalam,cursive;font-size:clamp(24px,7.5vw,34px);line-height:1.1;padding:4px 12px;border:3px solid #2b2b3a;border-radius:255px 15px 225px 15px/15px 225px 15px 255px;margin:0 0 10px -4px;transform:rotate(-1.5deg)}
+.cover .s{font-size:15px;line-height:1.35;margin:14px 0}
+.cover .e{position:absolute;font-size:38px}
+.cover .f{position:absolute;left:30px;right:14px;bottom:16px;padding:6px 10px;border:2.5px solid #2b2b3a;border-radius:255px 15px 225px 15px/15px 225px 15px 255px;background:#b5efcf;font-size:12.5px;text-align:center;font-weight:700}
+.end{text-align:center;padding-top:50px}.end .big{font-size:56px}
+.ctl{display:flex;gap:10px;align-items:center;justify-content:center;padding:6px 14px 14px;width:100%;max-width:480px}
+.btn{font-family:Kalam,cursive;font-weight:700;font-size:15px;color:#2b2b3a;background:#ffe566;border:2.5px solid #2b2b3a;border-radius:255px 15px 225px 15px/15px 225px 15px 255px;padding:8px 16px;cursor:pointer;box-shadow:3px 3px 0 #ff9ec0}
+.btn:active{transform:translate(2px,2px);box-shadow:1px 1px 0 #ff9ec0}.btn:disabled{opacity:.4}
+.mid{flex:1;text-align:center;font-size:13px}
+.bar{height:8px;border-radius:9px;background:rgba(120,100,170,.25);margin-top:4px;overflow:hidden}.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,#7c5cff,#ec4899);transition:width .4s}
+</style>
+</head>
+<body>
+<div class="top">📖 Digital Products &amp; Online Earning<small>Swipe ya tap karke page palto</small></div>
+<div id="stage"><div id="book"></div></div>
+<div class="ctl"><button class="btn" id="pv">←</button><div class="mid"><span id="ct"></span><div class="bar"><i id="pb"></i></div></div><button class="btn" id="nx">→</button></div>
+<script>
+const RAW="CHAPTER 1\nDigital Product Kya Hai?\nDigital product ek aisi cheez hoti hai jo customer online receive ya download kar sakta hai.\n## Examples:\n- PDF\n- eBook\n- AI Prompt Pack\n- Canva Templates\n- Social Media Templates\n- Content Calendar\n- Digital Planner\n- Cheat Sheet\n- Mini Course\n- Video Course\n- Guides\n- Worksheets\n## Simple Example\nAap ek PDF banati hain:\n“30 AI UGC Prompts for Small Businesses”\nCustomer payment karta hai → PDF receive karta hai → prompts ko copy karke apne product ke liye content banata hai.\nAapko physical product pack, courier ya inventory ki zaroorat nahi hoti.\nCHAPTER 2\nOnline Earning Kaise Start Karein?\nOnline earning start karne ka simple formula:\n!! Skill → Problem → Solution → Product → Marketing → Sale\n## Example:\nSkill: AI prompts banana\nProblem: Small businesses ko product videos ke ideas nahi milte.\nSolution: Ready-to-use AI UGC prompts\nProduct: AI UGC Prompt Pack\nMarketing: Instagram/TikTok Reels\nSale: Website/DM/available payment method\nSabse important baat:\nSirf “mujhe online earning karni hai” se start na karein.\nPehle decide karein:\n!! Main kiski problem solve kar sakti hoon?\nCHAPTER 3\nProduct Idea Kaise Choose Karein?\nGood digital product woh hai jo kisi specific problem ko solve karta hai.\n## Weak Idea\n“100 AI Prompts”\nCustomer ko clear nahi hai ke ye prompts kis kaam ke hain.\n## Better Idea\n“30 AI UGC Prompts for Small Businesses”\nAb customer ko immediately samajh aa gaya:\n- Product kis ke liye hai\n- Kis problem ke liye hai\n- Kya milega\n## Product Formula\n!! [Number] + [Solution] + [Target Audience]\n## Examples:\n- 50 AI Prompts for Content Creators\n- 30 UGC Prompts for Beauty Businesses\n- 100 Reels Hooks for Small Businesses\n- 30-Day Content Calendar for Instagram Sellers\nCHAPTER 4\nTarget Customer Kaise Find Karein?\nHar kisi ko target karne ki koshish na karein.\nInstead, ek clear audience choose karein.\n## Examples:\n- Small business owners\n- Content creators\n- Freelancers\n- Instagram sellers\n- YouTubers\n- TikTok creators\n- Beauty businesses\n- Clothing businesses\n- Home-based businesses\n## Simple Question\nApne aap se poochein:\n!! “Mera product sabse zyada kis person ke kaam aayega?”\nAgar jawab clear hai, marketing bhi easy ho jati hai.\nCHAPTER 5\nCustomer Ki Problem Identify Karein\nProduct banane se pehle problem find karein.\n## Example:\nAudience: Small business owners\nProblem: Product promotion ke liye engaging videos banana mushkil.\nSolution: Ready-made AI UGC prompts.\nResult: Content creation easier aur faster ho sakti hai.\n## Formula\n!! Audience → Problem → Solution → Result\nIs formula ko apne har digital product par apply karein.\nCHAPTER 6\nDigital Product Kaise Create Karein?\nAb actual product banate hain.\n## Example:\nProduct: 30 AI UGC Prompts\n## Structure:\n- Page 1: Cover\n- Page 2: Introduction\n- Page 3: UGC kya hai?\n- Page 4: Prompts kaise use karein?\n- Pages 5–34: 30 prompts\n- Final Pages: Tips + CTA\n## Har Prompt Ka Format\nPrompt #1\nProduct: [Your Product]\nScene: [Scene]\nCharacter: [Character]\nAction: [Action]\nCamera: [Camera angle]\nLighting: [Lighting]\nStyle: [Visual style]\nOutput: 9:16 vertical video\nIsse customer ko prompt customize karna easy hota hai.\nCHAPTER 7\nAI Se Product Creation\nAI aapko product create karne mein help kar sakta hai.\nChatGPT se aap:\n- Ideas generate kar sakti hain\n- Chapters bana sakti hain\n- Prompts likh sakti hain\n- Hooks bana sakti hain\n- Captions likh sakti hain\n- Product descriptions bana sakti hain\n- FAQs create kar sakti hain\n## Example Command\n!! “Create 30 AI UGC prompts for Pakistani small business owners selling skincare products. Make each prompt practical, easy to customize and suitable for short-form vertical videos.”\nAI se generated content ko review, edit aur improve zaroor karein.\nCHAPTER 8\nProduct Ki Value Kaise Increase Karein?\nSirf quantity par focus na karein.\n## Basic Offer\n30 Prompts\n## Better Offer\n- 30 Prompts\n- + 10 Hooks\n- + 5 CTAs\n## Stronger Offer\n- 30 Prompts\n- + 10 Hooks\n- + 5 CTAs\n- + Customization Guide\n- + Bonus Prompts\nCustomer ko clearly bataein:\n“Aapko kya milega?”\nAur:\n“Isse aap kya kar sakte hain?”\nCHAPTER 9\nPricing Kaise Set Karein?\nDigital product ki price sirf pages ki quantity se decide nahi hoti.\n## Consider karein:\n- Product ki usefulness\n- Problem ki importance\n- Time saved\n- Content quality\n- Bonuses\n- Target customer\n- Market expectations\n## Beginner Strategy\nEk simple product se start karein.\nPhir customer feedback ke basis par:\n!! Basic → Improved → Bundle\nversion create karein.\nApni price ko test karein aur dekhein kis offer par customers ka response better hai.\nCHAPTER 10\nProduct Branding & Presentation\nGood product ko professional presentation chahiye.\n## Cover par:\n- Clear Title: AI UGC PROMPT KIT\n- Clear Benefit: Create Product Promo Videos Faster\n- Clear Audience: For Small Business Owners\n## Design:\n- Clean layout\n- Easy-to-read fonts\n- Consistent colors\n- Professional images\n- Simple sections\nCustomer ko first look mein samajh aa jana chahiye:\n!! Product kya hai + kis ke liye hai + kya benefit hai.\nCHAPTER 11\nInstagram & TikTok Marketing\nAapko har Reel mein directly “Buy my product” kehna zaroori nahi.\n## Content ke 3 types rakhein:\n## 1. Educational\nExample: “3 UGC hooks your product videos need.”\n## 2. Demonstration\nEk prompt ko use karke result dikhaein.\n## 3. Sales Content\nProduct mein kya milta hai aur customer ko kya benefit milega, dikhayein.\n## Simple Content Formula\n!! Hook → Value → Product → CTA\nCHAPTER 12\nContent Se Sales Kaise Generate Karein?\n## Example Reel:\n## Hook\n“Product hai, lekin UGC video ka idea nahi?”\n## Value\n“Ye simple AI prompt aapko product demo video ka concept de sakta hai.”\n## Product\n“Isi type ke 30 ready-to-use prompts mere AI UGC Prompt Kit mein hain.”\n## CTA\n“Get the Prompt Kit.”\nCustomer ko pehle reason dein ke woh ruk kar dekhe.\nPhir value dein.\nPhir offer.\nCHAPTER 13\nCTA Kaise Use Karein?\nCTA = Call To Action.\nYani customer ko batana: “Ab kya karna hai?”\n## Examples:\n- Get the Prompt Pack\n- Download the Guide\n- Get the Full Kit\n- Start Creating\n- Check the Full Pack\n- Get the Free Version\nCTA clear aur simple rakhein.\nCHAPTER 14\nFree Product Se Audience Build Karein\nHar product paid hona zaroori nahi.\nEk small free product bana sakti hain:\n!! “10 Free AI UGC Prompts”\nCustomer free product try karega.\nPhir aap offer kar sakti hain:\n“Want 50 more prompts? Get the Full UGC Pack.”\nYeh free → paid journey create kar sakta hai.\nCHAPTER 15\nPaid Product Kaise Sell Karein?\nSimple selling process:\n!! Content → Interest → Product Page → Payment → Delivery\nProduct page par clearly likhein:\n## What You Get\n- 30 AI UGC Prompts\n- 10 Hooks\n- 5 CTAs\n- Quick Guide\n- Bonus Prompts\n## Who Is It For?\nSmall business owners who want easier product-promotion content creation.\n## CTA\nGet the Full Pack\nPayment aur delivery system aapke chosen platform ke according set karein.\nCHAPTER 16\nCommon Mistakes\n## Mistake 1\nX Product ko too broad banana\nOK Fix: Specific audience choose karein.\n## Mistake 2\nX Sirf “100 prompts” likhna\nOK Fix: Benefit explain karein.\n## Mistake 3\nX Customer ki problem ignore karna\nOK Fix: Problem → Solution clearly show karein.\n## Mistake 4\nX Sirf product posts karna\nOK Fix: Educational + Demo + Sales content mix karein.\n## Mistake 5\nX Fake income promises\nOK Fix: Realistic claims use karein. “Earn $1,000 guaranteed” ki jagah: “Learn how to create and sell digital products.”\nCHAPTER 17\n7-Day Digital Product Launch Plan\n## DAY 1 — IDEA\nAudience + Problem + Product decide karein.\n## DAY 2 — CREATE\nProduct ka content complete karein.\n## DAY 3 — DESIGN\nCanva mein professional PDF design karein.\n## DAY 4 — PRODUCT PAGE\nTitle + description + benefits + CTA add karein.\n## DAY 5 — CONTENT\n3–5 promotional Reels prepare karein.\n## DAY 6 — LAUNCH\nProduct announce karein.\n## DAY 7 — IMPROVE\nViews, clicks, comments aur customer feedback check karein.\nJo content better response de, us type ke aur variations banayein.\nCHAPTER 18\n20 Digital Product Ideas\n- 1. AI Prompt Pack\n- 2. UGC Prompt Pack\n- 3. Instagram Hook Pack\n- 4. TikTok Hook Pack\n- 5. Reels Script Pack\n- 6. Canva Template Pack\n- 7. Instagram Content Calendar\n- 8. Digital Planner\n- 9. Small Business Caption Pack\n- 10. Product Description Pack\n- 11. AI Thumbnail Prompt Pack\n- 12. AI Image Prompt Pack\n- 13. AI Video Prompt Pack\n- 14. Creator Cheat Sheet\n- 15. Social Media Starter Guide\n- 16. Digital Product Starter Guide\n- 17. Content Repurposing Guide\n- 18. Mini AI Course\n- 19. Business Content Bundle\n- 20. Creator AI Toolkit\nCHAPTER 19\nChatGPT Commands for Product Creation\nCMD \"/brainstorm\" | New product ideas generate karne ke liye.\nCMD \"/upgrade\" | Basic product idea ko stronger banane ke liye.\nCMD \"/simply\" | Difficult information ko simple banane ke liye.\nCMD \"/proofread\" | Spelling, grammar aur wording improve karne ke liye.\nCMD \"/seo\" | Search-friendly content ke liye.\nCMD \"/headline\" | Strong titles/headlines ke liye.\nCMD \"/script\" | Reels/TikTok scripts ke liye.\nCMD \"/hook\" | Attention-grabbing hooks ke liye.\nCMD \"/repurpose\" | Ek content ko multiple formats mein convert karne ke liye.\nCMD \"/compare\" | Do products/ideas ka side-by-side comparison karne ke liye.\nCHAPTER 20\nFinal Creator Checklist\nProduct launch karne se pehle check karein:\nBOX Audience clear hai\nBOX Problem clear hai\nBOX Product solution deta hai\nBOX Product name clear hai\nBOX Benefits written hain\nBOX Product professionally designed hai\nBOX Price decided hai\nBOX Payment method ready hai\nBOX Delivery method ready hai\nBOX Product page ready hai\nBOX Promotional Reel ready hai\nBOX CTA clear hai\nBOX Customer feedback ka plan hai\nAgar ye sab ready hai, aap launch ke liye prepared hain.\nBONUS\n100 Creator Commands Cheat Sheet\n## CONTENT\nCMDS /brainstorm /ideas /content /calendar /script /hook /story /storyteller /caption /headline\n## MARKETING\nCMDS /seo /keywords /cta /offer /audience /customer /marketing /sales /funnel /launch\n## AI PROMPTS\nCMDS /prompt /promptengineer /upgrade /example /visual /imageprompt /videoprompt /ugc /productprompt /consistent\n## WRITING\nCMDS /proofread /human /rewrite /simplify /expand /shorten /professional /friendly /tone /translate\n## CREATIVE\nCMDS /moodboard /palette /concept /creative /visualize /storyboard /camera /lighting /style /aesthetic\n## CREATOR GROWTH\nCMDS /repurpose /analyze /optimize /strategy /growth /retention /engagement /trends /contentplan /consistently\n## DIGITAL PRODUCTS\nCMDS /product /productidea /ebook /guide /promptpack /bundle /pricing /value /description /productpage\n## LEARNING\nCMDS /teacher /ELI10 /simply /viva /beginner /deepdiva /logic-step /80-20 /conceptclear /decode\n## IMPROVEMENT\nCMDS /killercritic /compare /fix /improve /check /review /feedback /optimize /refine /upgrade\n## FINAL CREATOR TOOLS\nCMDS /fast /expert /xthink /x10 /top20 /solved /how /example /brainstorm /simply\n## FINAL MESSAGE\nDigital product business start karne ke liye aapko hundreds of products ki zaroorat nahi.\nStart small.\nEk audience choose karein.\nEk problem identify karein.\nEk useful solution banayein.\nUs solution ko professional product mein convert karein.\nContent ke through uski value demonstrate karein.\nCustomer feedback lein.\nPhir product ko improve karein.\nRemember:\n!! Problem → Solution → Product → Content → Customer → Sale\nYour first product doesn't have to be perfect.\nIt needs to be useful, clear and easy to use.\n";
+const IC=['🎁','🚀','💡','🎯','💬','✏️','✨','📈','🛒','🎨','📱','📊','📣','🧲','🛍️','⚠️','📅','📝','🤖','✅','⭐'];
+const esc=t=>t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+const lines=RAW.split('\n').map(s=>s.trim()).filter(Boolean);
+const chs=[];let cu=null;
+for(const l of lines){if(/^CHAPTER |^BONUS$/.test(l)){cu=[l,null,[]];chs.push(cu);continue}if(cu[1]===null){cu[1]=l;continue}cu[2].push(l)}
+let mk=0,bi=0;
+function item(l){
+ if(l.startsWith('## ')){return['<h3 class="c'+((mk++)%6)+'">'+esc(l.slice(3))+'</h3><br>',2.2,1]}
+ if(l.startsWith('!! ')){return['<div class="call">'+esc(l.slice(3))+'</div>',Math.ceil(l.length/26)*1.3+1]}
+ if(l.startsWith('- ')){return['<div class="li"><i class="c'+((bi++)%6)+'"></i><span>'+esc(l.slice(2))+'</span></div>',Math.ceil(l.length/30)+.3]}
+ if(l.startsWith('BOX ')){return['<div class="li box"><i></i><span>'+esc(l.slice(4))+'</span></div>',1.3]}
+ if(l.startsWith('X ')){return['<div class="li x"><i>✗</i><span>'+esc(l.slice(2))+'</span></div>',1.3]}
+ if(l.startsWith('OK ')){return['<div class="li ok"><i>✓</i><span>'+esc(l.slice(3))+'</span></div>',Math.ceil(l.length/30)+.3]}
+ if(l.startsWith('CMDS ')){const a=l.slice(5).split(' ');return['<div class="chips">'+a.map((x,i)=>'<span class="chip c'+(i%6)+'">'+esc(x)+'</span>').join('')+'</div>',Math.ceil(a.length/3.5)*1.8]}
+ if(l.startsWith('CMD ')){const[a,b]=l.slice(4).split(' | ');return['<div class="cmd"><span class="chip c'+((bi++)%6)+'">'+esc(a.replace(/"/g,''))+'</span><span>'+esc(b)+'</span></div>',1.7]}
+ return['<p>'+esc(l)+'</p>',Math.ceil(l.length/32)*1.1+.3];
+}
+const wrap=(h,n)=>'<div class="pg"><div class="in">'+h+'</div><div class="pn">'+n+'</div></div>';
+const CAP=15,cp=[],starts=[];
+chs.forEach((c,ci)=>{
+ const col='c'+(ci%6),ic=IC[ci]||'⭐',tag=c[0]==='BONUS'?'BONUS 🎁':c[0];
+ starts.push(2+cp.length);
+ let cur='<div class="hd"><span class="tag '+col+'">'+tag+'</span><h2>'+esc(c[1])+'</h2><div class="blob '+col+'">'+ic+'</div></div>',w=4.5;
+ c[2].forEach(l=>{const[h,wt]=item(l);const isH=l.startsWith('## ');
+  if(w>5&&(isH?w+wt+3:w+wt)>CAP){cp.push(cur);cur='<div class="cont">'+esc(tag+' · '+c[1])+' (contd.)</div>';w=1.5}
+  cur+=h;w+=wt});
+ cp.push(cur);
+});
+const cover='<div class="cover"><div class="t" style="background:#ffe566">DIGITAL PRODUCTS</div><br><div class="t" style="background:#ffb3c7;transform:rotate(1deg)">&amp; ONLINE EARNING</div><div class="s">Beginner se Apna Digital Product Create, Market &amp; Sell Karne Tak Complete Guide</div><span class="e" style="left:36px;top:46%;transform:rotate(-10deg)">💡</span><span class="e" style="right:26px;top:42%;font-size:56px;transform:rotate(12deg)">🚀</span><span class="e" style="left:40%;top:56%">🎁</span><span class="e" style="left:30px;top:68%;font-size:30px">📈</span><span class="e" style="right:40px;top:66%;font-size:32px">📱</span><span class="e" style="left:48%;top:42%;font-size:24px">⭐</span><div class="f">For Pakistani Creators, Freelancers &amp; Small Business Owners</div></div>';
+const toc='<div class="pg"><div class="in"><div class="hd"><span class="tag c3">INSIDE</span><h2>Contents</h2><div class="blob c3">✅</div></div>'+chs.map((c,i)=>'<div class="toc" data-go="'+starts[i]+'"><b class="c'+(i%6)+'">'+(c[0]==='BONUS'?'★':c[0].replace('CHAPTER ',''))+'</b><span>'+esc(c[1])+'</span></div>').join('')+'</div><div class="pn">2</div></div>';
+const end='<div class="pg"><div class="in end"><div class="big">🎉</div><h2 style="display:inline-block">The End</h2><p>Start small. Ek audience, ek problem, ek useful solution.</p><p><b>Your first product doesn’t have to be perfect.</b></p><br><button class="btn" data-go="0">Cover par wapas ↺</button></div><div class="pn"></div></div>';
+const pages=[cover,toc,...cp.map((h,i)=>wrap(h,i+3)),end];
+const n=pages.length,book=document.getElementById('book');
+book.innerHTML=pages.map(p=>'<div class="leaf"><div class="face">'+p+'</div><div class="face back"></div></div>').join('');
+const L=[...book.children];let idx=0;
+const setZ=()=>L.forEach((l,i)=>l.style.zIndex=i<idx?i:n-i);
+function upd(){document.getElementById('ct').textContent='Page '+(idx+1)+' / '+n;document.getElementById('pb').style.width=((idx+1)/n*100)+'%';pv.disabled=idx===0;nx.disabled=idx===n-1}
+function after(l){setTimeout(()=>{setZ();if(l.classList.contains('flip'))l.style.visibility='hidden'},880)}
+function flip(d){
+ if(d>0&&idx<n-1){const l=L[idx];l.style.zIndex=1000;l.style.visibility='visible';l.classList.add('flip');idx++;after(l)}
+ else if(d<0&&idx>0){const l=L[idx-1];l.style.zIndex=1000;l.style.visibility='visible';l.classList.remove('flip');idx--;after(l)}
+ upd()}
+function go(t){const s=()=>{if(idx<t){flip(1);setTimeout(s,110)}else if(idx>t){flip(-1);setTimeout(s,110)}};s()}
+const pv=document.getElementById('pv'),nx=document.getElementById('nx');
+pv.onclick=()=>flip(-1);nx.onclick=()=>flip(1);
+addEventListener('keydown',e=>{if(e.key==='ArrowRight')flip(1);if(e.key==='ArrowLeft')flip(-1)});
+let sx,sy,drag=false,dir=0,lf=null,la=0,down=false,tg=null;
+function finish(commit){
+ lf.style.transition='';const fin=dir>0?commit:!commit;
+ lf.classList.toggle('flip',fin);lf.style.transform='';
+ if(commit){idx+=dir}after(lf);upd();drag=false;lf=null}
+book.addEventListener('pointerdown',e=>{down=true;drag=false;sx=e.clientX;sy=e.clientY;tg=e.target});
+book.addEventListener('pointermove',e=>{
+ if(!down)return;const dx=e.clientX-sx,dy=e.clientY-sy;
+ if(!drag){if(Math.abs(dx)>10&&Math.abs(dx)>Math.abs(dy)){dir=dx<0?1:-1;lf=dir>0?(idx<n-1?L[idx]:null):L[idx-1];if(!lf){down=false;return}drag=true;lf.style.transition='none';lf.style.zIndex=1000;lf.style.visibility='visible';try{book.setPointerCapture(e.pointerId)}catch(_){}}else return}
+ const W=book.getBoundingClientRect().width*.8;
+ la=Math.max(-180,Math.min(0,dir>0?dx/W*180:-180+dx/W*180));lf.style.transform='rotateY('+la+'deg)'});
+function up(e,cancel){
+ if(!down)return;down=false;
+ if(drag){finish(cancel?false:(dir>0?la<-60:la>-120));return}
+ if(cancel||Math.abs(e.clientX-sx)>10||Math.abs(e.clientY-sy)>10)return;
+ const g=tg&&tg.closest&&tg.closest('[data-go]');
+ if(g){go(+g.dataset.go);return}
+ const r=book.getBoundingClientRect();flip(e.clientX>r.left+r.width/2?1:-1)}
+book.addEventListener('pointerup',e=>up(e,false));
+book.addEventListener('pointercancel',e=>up(e,true));
+setZ();upd();
+</script>
+</body>
+</html>
